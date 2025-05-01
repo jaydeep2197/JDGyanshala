@@ -1,28 +1,88 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="gu">
 <head>
-    <meta charset="UTF-8">
+
+       <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jd Gyan Shala</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Gujarati:wght@400;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet"> </head>
-
-    <title>શાળા ID કાર્ડ જનરેટર</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+      <title>શાળા ID કાર્ડ જનરેટર</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.5/xlsx.full.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
-  <style>
+  
 
-       /* --- હેડર અને ફૂટર --- */
+
+ 
+     <style>
+
+* {
+    box-sizing: border-box; /* પેડિંગ અને બોર્ડરને પહોળાઈ અને ઊંચાઈમાં સમાવવા */
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Noto Sans Gujarati', sans-serif; /* ગુજરાતી ફોન્ટ */
+    line-height: 1.5;
+    background-color: #f4f7f6; /* હળવો બેકગ્રાઉન્ડ કલર */
+    color: #333;
+}
+
+.container {
+    width: 90%;
+    max-width: 1100px; /* મહત્તમ પહોળાઈ */
+    margin: auto; /* મધ્યમાં લાવવા */
+    padding: 0 15px; /* બાજુઓથી થોડું પેડિંગ */
+    overflow: hidden; /* Clear floats - જો જરૂર હોય તો */
+}
+
+a {
+    text-decoration: none; /* લિંક નીચેની લાઈન દૂર કરવા */
+    color: #007bff; /* લિંક કલર */
+    transition: color 0.3s ease; /* હોવર પર કલર ટ્રાન્ઝિશન */
+}
+
+a:hover {
+    color: #0056b3; /* હોવર પર ડાર્ક કલર */
+}
+
+h1, h2, h3, h4, h5 {
+    color: #1a5f7a; /* હેડિંગ કલર */
+    margin-bottom: 15px;
+}
+
+p {
+    margin-bottom: 15px;
+}
+        
+        :root {
+            --primary-color: #1e3c72;
+            --secondary-color: #2a5298;
+            --text-primary: #2c3e50;
+            --text-secondary: #34495e;
+            --card-bg: #ffffff;
+        }
+
+        body {
+            font-family: 'Noto Sans Gujarati', sans-serif;
+            background: #f0f4ff;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+      /* --- હેડર અને ફૂટર --- */
 header {
     background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-background-size: 400% 400%;
+background-size: 600% 400%;
+background-right:100px;
 animation: gradientBG 15s ease infinite;
 color: white;
-padding: 30px;
+padding: 20px;
 text-align: center;
 font-size: 3.2em;
 font-weight: bold;
@@ -30,33 +90,14 @@ text-shadow: 6px 6px 4px rgba(0, 0, 0, 0.4); /* halka black shadow */
 border-radius: 12px; /* થોડું વધારે ગોળ */
 font-family: 'Poppins', sans-serif; /* Stylish modern font */
 letter-spacing: 1px; /* Thoda gap har letter ke bich */
- /*animation: typing 4s steps(30) 1s 1 normal both, blinkCursor 0.7s infinite;*/
 }
 
-
-
-     
 @keyframes gradientBG {
 
     0% {background-position: 0% 50%;}
     50% {background-position: 100% 50%;}
     100% {background-position: 0% 50%;}
 }
-  .logo-img {
-  max-height: 100px; /* Adjust as needed */
-  display: flex;
-  align-items: center; /* Vertically aligns items in the center */
-}
-
-.logo-img {
-  /* Optional image styles */
-  margin-right: 10px; /* Add some spacing between the image and text */
-}
-
-.logo-img span {
-  /* Optional text styles */
-}
-
 
 header nav ul {
     display: block;
@@ -64,8 +105,8 @@ header nav ul {
 }
 
 header nav ul li {
-   /* list-style-type: disc; /* Bullet laavavu */
-    margin-right: 1px; /* Andar space */
+    list-style-type: disc; /* Bullet laavavu */
+    margin-right: 2px; /* Andar space */
 }
 
 header nav ul li a {
@@ -83,9 +124,7 @@ footer {
     background-size: 400% 400%;
     animation: gradientBG 15s ease infinite;
     color: white;
-    margin-top: 30px;
     padding: 20px;
-    bottom: 20px;
     text-align: center;
 }
 
@@ -97,8 +136,8 @@ footer {
     letter-spacing: 1px; /* Thoda gap har letter ke bich */
     padding: 60px 0;
     text-align: center;
-    margin-top: 30px;
     margin-bottom: 30px;
+    margin-top: 30px;
     border-radius: 12px; /* થોડું વધારે ગોળ */
     border: 2px solid #ffffff50; /* હલકું સફેદ બોર્ડર */
     box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.3); /* નવો શેડો */
@@ -152,21 +191,31 @@ footer {
         transform: translateY(0);
     }
 }
-        :root {
-            --primary-color: #1e3c72;
-            --secondary-color: #2a5298;
-            --text-primary: #2c3e50;
-            --text-secondary: #34495e;
-            --card-bg: #ffffff;
-        }
+    .scroll-text {
+      width: 100%;
+      overflow: hidden;
+      white-space: nowrap;
+      box-sizing: border-box;
+      border-top: 2px solid #ff4081;
+      border-bottom: 2px solid #ff4081;
+      padding: 10px 0;
+      background: linear-gradient(to right, #2b2b2b, #1c1c1c);
+    }
 
-        body {
-            font-family: 'Noto Sans Gujarati', sans-serif;
-            background: #f0f4ff;
-            margin: 0;
-            padding: 20px;
-            min-height: 100vh;
-        }
+    .scroll-text span {
+      display: inline-block;
+      padding-left: 100%;
+      animation: scroll 30s linear infinite;
+      font-size: 24px;
+      font-weight: bold;
+      color: #ffeb3b;
+      text-shadow: 2px 2px 5px #000;
+    }
+
+    @keyframes scroll {
+      0%   { transform: translateX(0%); }
+      100% { transform: translateX(-100%); }
+    }
 
         h1 {
             color: var(--primary-color);
@@ -202,10 +251,10 @@ footer {
             color: white;
         }
 
-        .id-container {
+        .i-container {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 5px;
+            grid-template-columns: repeat(auto-fill, minmax(370px, 1fr));
+           column-gap: 5px;
             padding: 10px;
         }
 
@@ -235,8 +284,8 @@ footer {
         }
 
         .logo, .photo {
-            width: 80px;
-            height: 80px;
+            width: 95px;
+            height: 95px;
             border: 2px solid var(--primary-color);
             border-radius: 8px;
             background: #fff;
@@ -261,13 +310,13 @@ footer {
         .details {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 5px;
-            margin-bottom: 5px;
+            gap: 2px auto;
+            margin-bottom: 4px;
         }
 
         .info-item {
             display: flex;
-            gap: 5px;
+            gap: auto;
             align-items: baseline;
         }
 
@@ -275,19 +324,19 @@ footer {
             color: var(--primary-color);
             font-weight: 600;
             flex-shrink: 0;
-            font-size: 1em;
+            font-size: 0.90em;
         }
 
         .info-value {
             color: var(--text-secondary);
-            font-weight: 500;
+            font-weight: 525;
             word-break: break-word;
-            font-size: 0.98em;
+            font-size: 0.85em;
         }
 
         .barcode-container {
-            text-align: center;
-            margin: 5px 0;
+            text-align: auto;
+            margin: auto;
             height: 50px;
         }
         
@@ -298,24 +347,25 @@ footer {
 
         .footer {
             border-top: 1px dashed var(--primary-color);
-            padding-top: 2px;
+            padding-top: 5px;
             text-align: center;
             color: var(--text-secondary);
-            font-size: 0.5em;
+            font-size: 0.8em;
         }
 
         input[type="file"] {
             display: none;
         }
 
-        .no-photo {
+           .no-photo {
             display: flex;
             align-items: center;
             justify-content: center;
             height: 100%;
             color: var(--text-secondary);
-            font-size: 0.9em;
-            padding: 10px;
+            font-size: 0.95em;
+             font-weight: 800;
+            padding-left: 5px;
         }
 
         #pdf-progress {
@@ -340,7 +390,7 @@ footer {
             }
             .card {
                 box-shadow: none !important;
-                margin: 10px 0 !important;
+                margin: 20px 0 !important;
                 -webkit-print-color-adjust: exact;
                 print-color-adjust: exact;
             }
@@ -348,10 +398,9 @@ footer {
     </style>
 </head>
 <body>
-
-        <header>
+    <header>
     <div class="container">
-        <div >GYAN SHALA</div>
+        <div>GYAN SHALA</div>
         <nav>
             <ul>
                 <li><a href="home.html">home</a></li>
@@ -370,11 +419,14 @@ footer {
     <main>
         <section class="hero">
             <div class="container">
-                <h1> welcome to the my GYAN-SHALA</h1>
-                <p>સરળતાથી મેનેજ કરો અને એક્સેસ કરો.</p>
+                <h1> welcome to the my GYAN SHALA</h1>
+                <p style = "text.align: center";>સરળતાથી મેનેજ કરો અને એક્સેસ કરો.</p>
             </div>
         </section>
- 
+    <main>
+         <div class="scroll-text">
+    <span>I'd Card બનાવવા માટે home menu માં excel file માં જાઓ ત્યાંથી I'd card excel file download કરો. ત્યારબાદ તેમાં જે જરૂરી માહિતી છે તે ભરો અને excel file ને અહીંયા upload કરો થોડી વાર રાહ જુઓ તમારા I'd card બની જશે.!</span>
+  </div>
     <h1>શાળા ID કાર્ડ જનરેટર</h1>
     
     <div class="upload-section">
@@ -398,12 +450,13 @@ footer {
         <progress value="0" max="100" style="width: 200px;"></progress>
     </div>
 
-    <div class="id-container" id="cards"></div>
+    <div class="i-container" id="cards"></div>
+      <div class="footer">
     <footer>
-    <p>© 2025 Jd Gyan Shala. All rights reserved.</p>
-    <p><a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+    <h2>© 2025 Jd Gyan Shala. All rights reserved.</h2>
+    <p style="text-align: center";><a href="Privacy Policy.html">Privacy Policy</a> | <a href="Terms of Service.html">Terms of Service</a></p>
     </footer>
-
+   </div>
 
     <script>
         let schoolLogo = null;
@@ -419,6 +472,32 @@ footer {
             document.getElementById('progress-text').textContent = `પ્રગતિ: ${percent}%`;
             document.querySelector('#pdf-progress progress').value = percent;
         };
+       
+         function formatDate(value) {
+    if (!value) return '';
+
+    // Excel serial number detection: only if value is a number and large enough
+    if (!isNaN(value) && Number(value) > 10000) {
+        const excelDate = new Date((Number(value) - 25569) * 86400 * 1000);
+        const day = String(excelDate.getUTCDate()).padStart(2, '0');
+        const month = String(excelDate.getUTCMonth() + 1).padStart(2, '0');
+        const year = excelDate.getUTCFullYear();
+        return `${day}/${month}/${year}`;
+    }
+
+    // Handle if value is a string date
+    const date = new Date(value);
+    if (!isNaN(date)) {
+        const day = String(date.getDate()).padStart(2, '0');
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const year = date.getFullYear();
+        return `${day}/${month}/${year}`;
+    }
+
+    // fallback
+    return value;
+}
+
 
         // ફાઇલ અપલોડ હેન્ડલર્સ
         document.getElementById('logoUpload').addEventListener('change', function(e) {
@@ -457,91 +536,104 @@ footer {
 
         // એક્સેલ પ્રોસેસિંગ
         const processExcelSheet = (sheet) => {
-            const requiredHeaders = ['વિદ્યાર્થીનું નામ (ગુજરાતી)', 'જ.ર.નં','ધોરણ', 'જન્મ તારીખ','પિતાનું નામ','માતાનું  નામ','હાલનું સરનામું','મોબાઈલ', 'ફોટો'];
-            headerMap = {};
-            
-            const range = XLSX.utils.decode_range(sheet['!ref']);
-            for(let row = range.s.r; row <= range.e.r; row++) {
-                const rowData = XLSX.utils.sheet_to_json(sheet, {header: 1, range: row})[0];
-                if(rowData.filter(cell => requiredHeaders.includes(String(cell).trim())).length >= requiredHeaders.length) {
-                    requiredHeaders.forEach(header => {
-                        const index = rowData.findIndex(cell => String(cell).trim() === header);
-                        if(index !== -1) headerMap[header] = index;
-                    });
-                    schoolName = sheet['A1']?.v || 'શાળાનું નામ';
-                    generateCards(XLSX.utils.sheet_to_json(sheet, {header: 1, range: row + 1}));
-                    break;
-                }
+    const requiredHeaders = [
+        'વિદ્યાર્થીનું નામ (ગુજરાતી)', 'જ.ર.નં','ધોરણ', 'જન્મ તારીખ','પિતાનું નામ','માતાનું  નામ','હાલનું સરનામું','મોબાઈલ','આધાર ડાયસ નંબર'
+    ];
+    headerMap = {};
+    let headerRowIndex = -1;
+    let foundSchoolName = false;
+
+    const range = XLSX.utils.decode_range(sheet['!ref']);
+    for(let row = range.s.r; row <= range.e.r; row++) {
+        const rowData = XLSX.utils.sheet_to_json(sheet, {header: 1, range: row})[0];
+
+        // શાળાનું નામ માટે તપાસો (કેસ-ઇન્સેન્સિટિવ)
+        const schoolNameHeaderIndex = rowData.findIndex(cell => String(cell).trim().toLowerCase() === 'શાળાનું નામ');
+        if (schoolNameHeaderIndex !== -1 && !foundSchoolName) {
+            const schoolNameColumnIndex = schoolNameHeaderIndex + 1; // બાજુની કોલમ
+            if (rowData[schoolNameColumnIndex]) {
+                schoolName = rowData[schoolNameColumnIndex];
+                foundSchoolName = true;
             }
-        };
+        }
+
+        // Required headers માટે તપાસો
+        if(rowData && rowData.filter(cell => requiredHeaders.includes(String(cell).trim())).length >= requiredHeaders.length) {
+            requiredHeaders.forEach(header => {
+                const index = rowData.findIndex(cell => String(cell).trim() === header);
+                if(index !== -1) headerMap[header] = index;
+            });
+            headerRowIndex = row;
+            break;
+        }
+    }
+
+    if (!schoolName) {
+        schoolName = sheet['A1']?.v || 'શાળાનું નામ'; // જો 'શાળાનું નામ' હેડર ન મળે તો પ્રથમ સેલ તપાસો
+    }
+
+    if (headerRowIndex !== -1) {
+        generateCards(XLSX.utils.sheet_to_json(sheet, {header: 1, range: headerRowIndex + 1}));
+    } else {
+        alert('જરૂરી હેડર ધરાવતી કોઈ હરોળ મળી નથી.');
+    }
+};
+
+
+
+
+
 
         // ID કાર્ડ જનરેશન
         const generateCards = (data) => {
-            const cardsDiv = document.getElementById('cards');
-            cardsDiv.innerHTML = '';
+    const cardsDiv = document.getElementById('cards');
+    cardsDiv.innerHTML = '';
+   
 
-            data.forEach(row => {
-                const getValue = (header) => row[headerMap[header]]?.toString() || '';
-                
-                const cardHTML = `
-                    <div class="card">
-                        <div class="school-name">${schoolName}</div>
-                        <div class="header">
-                            <div class="logo">
-                                ${schoolLogo ? `<img src="${schoolLogo}" alt="લોગો">` : ''}
-                            </div>
-                            <div class="title">છાત્ર ઓળખપત્ર</div>
-                            <div class="photo">${getPhotoHTML(getValue('ફોટો'))}</div>
-                        </div>
-                        <div class="details">
-                            ${renderInfoItems(row)}
-                        </div>
-                        ${renderBarcode(getValue('બારકોડ'))}
-                        <div class="footer">આ ઓળખપત્ર ફક્ત શાળા કાર્યો માટે જ માન્ય છે</div>
-                    </div>
-                `;
-                cardsDiv.innerHTML += cardHTML;
-            });
+    data.forEach((row, index) => {
+        const photoFilename = row[headerMap['ફોટો']] || '';
+        const photoUrl = photoMap[photoFilename] || '';
 
-            initializeBarcodes();
-        };
-
-        // હેલ્પર ફંક્શન્સ
-        const getPhotoHTML = (photoFile) => {
-            const photoURL = photoMap[photoFile?.trim()];
-            return photoURL ? `<img src="${photoURL}" alt="ફોટો">` : 
-                `<div class="no-photo">${photoFile ? 'ફોટો મળ્યો નથી' : 'ફોટો નથી'}</div>`;
-        };
-
-        const renderInfoItems = (row) => [
-            {label: 'નામ', header: 'વિદ્યાર્થીનું નામ (ગુજરાતી)'},
-            {label: 'જ.ર.નં', header: 'જ.ર.નં'},
-            {label: 'ધોરણ', header: 'ધોરણ'},
-            {label: 'જન્મતારીખ', header: 'જન્મ તારીખ'},
-            {label: 'પિતાનું નામ', header: 'પિતાનું નામ'},
-            {label: 'માતાનું નામ', header: 'માતાનું  નામ'},
-            {label: 'સરનામું', header: 'હાલનું સરનામું'},
-            {label: 'મોબાઈલ', header: 'મોબાઈલ'}
-        ].map(item => `
-            <div class="info-item">
-                <span class="info-label">${item.label}:</span>
-                <span class="info-value">${row[headerMap[item.header]] || ''}</span>
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `
+                         <div class="school-name">${schoolName}</div>
+            <div class="header">
+                <div class="logo">
+                    ${schoolLogo ? `<img src="${schoolLogo}" alt="logo">` : '<div class="no-photo">વિદ્યાથી વિકાસ <br>- <br>શાળાથી સંસ્કાર</div>'}
+                </div>
+                <div class="title">વિદ્યાર્થી ઓળખપત્ર</div>
+                <div class="photo">
+                    ${photoUrl ? `<img src="${photoUrl}" alt="photo">` : '<div class="no-photo">શિક્ષણથી<br> સિદ્ધિ સુધી</div>'}
+                </div>
             </div>
-        `).join('');
-
-        const renderBarcode = (value) => value ? `
+           
+            <div class="details">
+                <div class="info-item"><span class="info-label">નામ:</span><span class="info-value">${row[headerMap['વિદ્યાર્થીનું નામ (ગુજરાતી)']] || ''}</span></div>
+                <div class="info-item"><span class="info-label">જ.ર.નં:</span><span class="info-value">${row[headerMap['જ.ર.નં']] || ''}</span></div>
+              <div class="info-item"><span class="info-label">જન્મ તારીખ:</span><span class="info-value">${formatDate(row[headerMap['જન્મ તારીખ']])}</span></div>
+              <div class="info-item"><span class="info-label">ધોરણ:</span><span class="info-value">${row[headerMap['ધોરણ']] || ''}</span></div> 
+                <div class="info-item"><span class="info-label">પિતાનું નામ:</span><span class="info-value">${row[headerMap['પિતાનું નામ']] || ''}</span></div>
+                <div class="info-item"><span class="info-label">માતાનું  નામ:</span><span class="info-value">${row[headerMap['માતાનું  નામ']] || ''}</span></div>
+                <div class="info-item"><span class="info-label">સરનામું:</span><span class="info-value">${row[headerMap['હાલનું સરનામું']] || ''}</span></div>
+                <div class="info-item"><span class="info-label">મોબાઈલ:</span><span class="info-value">${row[headerMap['મોબાઈલ']] || ''}</span></div>
+            </div>
             <div class="barcode-container">
-                <svg class="barcode" data-value="${value}"></svg>
+                <svg id="barcode-${index}" class="barcode"></svg>
             </div>
-        ` : '';
+            <div class="footer">આ ઓળખપત્ર ફક્ત શાળા કાર્યો માટે જ માન્ય છે</div>
+        `;
+        cardsDiv.appendChild(card);
 
-        const initializeBarcodes = () => {
-            document.querySelectorAll('.barcode').forEach(barcode => {
-                const value = barcode.dataset.value;
-                if(value?.trim()) JsBarcode(barcode, value, {format: "CODE128", height: 40});
-            });
-        };
-
+        // Generate barcode
+      JsBarcode(`#barcode-${index}`, row[headerMap['આધાર ડાયસ નંબર']]?.trim() || '0000', {
+    format: "CODE128",
+    width: 2,
+    height: 40,
+    displayValue: false
+	});
+      });
+}
         // PDF જનરેશન
       const generatePDF = async () => {
     try {
@@ -554,10 +646,10 @@ footer {
         const pageHeight = pdf.internal.pageSize.getHeight();
 
         const cardsPerPage = 8;
-        const cardWidth = 80;  // Width of each card in mm
-        const cardHeight = 40; // Height of each card in mm
+        const cardWidth = 85.6;  // Width of each card in mm
+        const cardHeight = 54; // Height of each card in mm
         const horizontalSpacing = 25; // Horizontal spacing between cards
-        const verticalSpacing = 30;   // Vertical spacing between cards
+        const verticalSpacing = 10;   // Vertical spacing between cards
         const marginLeft = 5;        // Left margin
         const marginTop = 5;         // Top margin
 
