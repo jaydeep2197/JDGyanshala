@@ -647,3 +647,8 @@ header nav ul {
     margin-bottom: 40px;
     text-align: center;
 }
+
+.special-day-section {
+    text-align: center;
+    margin: 50px 0;
+}
