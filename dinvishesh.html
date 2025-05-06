@@ -2,7 +2,7 @@
 <html lang="gu">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>દિન વિશેષ - Jd Gyan Shala</title>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Gujarati:wght@400;700&display=swap" rel="stylesheet">
   <style>
@@ -26,24 +26,27 @@
       text-align: center;
       color: #2c3e50;
     }
-    p, li {
-      font-size: 18px;
-      color: #34495e;
-    }
     .highlight {
       background-color: #dff9fb;
       padding: 15px;
       border-left: 5px solid #2c3e50;
       margin-bottom: 30px;
       font-weight: bold;
+      cursor: pointer;
     }
     ul {
       list-style-type: none;
-      padding-left: 0;
+      padding: 0;
     }
     li {
-      padding: 8px 0;
+      font-size: 18px;
+      color: #34495e;
+      padding: 8px;
       border-bottom: 1px dashed #aaa;
+      cursor: pointer;
+    }
+    li:hover, .highlight:hover {
+      background-color: #e0e0e0;
     }
     .back-button {
       display: block;
@@ -56,6 +59,37 @@
       border-radius: 8px;
       font-weight: bold;
     }
+    /* Popup Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+    .modal-content {
+      background-color: white;
+      margin: 10% auto;
+      padding: 20px;
+      border-radius: 10px;
+      width: 80%;
+      max-width: 500px;
+      text-align: center;
+      position: relative;
+    }
+    .close {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      font-size: 28px;
+      font-weight: bold;
+      color: #aaa;
+      cursor: pointer;
+    }
+    .close:hover {
+      color: #000;
+    }
   </style>
 </head>
 <body>
@@ -67,9 +101,7 @@
   <main class="container">
     <h1>દિન વિશેષ</h1>
 
-    <div class="highlight" id="todaySpecial">
-      આજે શું વિશેષ છે?
-    </div>
+    <div class="highlight" id="todaySpecial">આજનું વિશેષ: લોડ થઈ રહ્યું છે...</div>
 
     <h2>અન્ય દિવસોની યાદી</h2>
     <ul id="specialDayList"></ul>
@@ -81,6 +113,15 @@
     <p>© 2025 Jd Gyan Shala. All rights reserved.</p>
   </footer>
 
+  <!-- Modal Box -->
+  <div id="myModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h3 id="modalTitle">વિશેષ માહિતી</h3>
+      <p id="modalText">માહિતી લોડ થઈ રહી છે...</p>
+    </div>
+  </div>
+
   <script>
     const specialDays = {
       "1-1": "નવ વર્ષની શુભકામનાઓ",
@@ -90,7 +131,7 @@
       "3-8": "મહિલા દિવસ",
       "4-7": "વિશ્વ આરોગ્ય દિવસ",
       "5-1": "મજૂર દિવસ",
-      "5-6": "No Diet Day",
+      "5-6": "નો ડાયેટ દિવસ",
       "5-11": "રાષ્ટ્રીય તકનીકી દિવસ",
       "6-5": "વિશ્વ પર્યાવરણ દિવસ",
       "8-15": "સ્વતંત્રતા દિવસ",
@@ -102,14 +143,35 @@
     const today = new Date();
     const todayKey = `${today.getMonth() + 1}-${today.getDate()}`;
     const todayMsg = specialDays[todayKey] || "આજના દિવસે કોઈ વિશેષ દિવસ નોંધાયેલો નથી.";
-
     document.getElementById("todaySpecial").textContent = `આજનું વિશેષ: ${todayMsg}`;
 
+    // Modal elements
+    const modal = document.getElementById("myModal");
+    const modalTitle = document.getElementById("modalTitle");
+    const modalText = document.getElementById("modalText");
+    const closeBtn = document.querySelector(".close");
+
+    function showModal(title, text) {
+      modalTitle.textContent = title;
+      modalText.textContent = text;
+      modal.style.display = "block";
+    }
+
+    closeBtn.onclick = () => modal.style.display = "none";
+    window.onclick = e => { if (e.target === modal) modal.style.display = "none"; };
+
+    // Show popup when clicking today's highlight
+    document.getElementById("todaySpecial").addEventListener("click", () => {
+      showModal("આજનું વિશેષ", todayMsg);
+    });
+
+    // Populate list and add click for popup
     const ul = document.getElementById("specialDayList");
     Object.entries(specialDays).forEach(([key, value]) => {
       if (key !== todayKey) {
         const li = document.createElement("li");
         li.textContent = `${key.replace('-', '/')} - ${value}`;
+        li.onclick = () => showModal(`${key.replace('-', '/')}નું વિશેષ`, value);
         ul.appendChild(li);
       }
     });
